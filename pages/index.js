@@ -1,8 +1,8 @@
 import { QueryClient, dehydrate, useQuery } from "react-query"
-import getPosts from "@/dataFetching/fetchPosts";
 import SearchInput from "@/components/searchInput";
 import Sorter from "@/components/sorter";
 import PostsContainer from "@/components/postsContainer";
+import getPosts from "./api/posts";
 
 export default function Home() {
   const {data, isLoading, isFetching} = useQuery("posts", getPosts);
