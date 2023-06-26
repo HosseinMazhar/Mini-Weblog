@@ -1,6 +1,10 @@
-import create from 'zustand'
+import {create} from 'zustand'
 
 export const usePostsStore = create((set) => ({
   posts: [],
-  setPosts: (post) => set({ post }),
+  sortPosts: (compareFn) => {
+    usePostsStore.setState((state) => ({
+      posts: [...state.posts].sort(compareFn),
+    }));
+  },
 }))
