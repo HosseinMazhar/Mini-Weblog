@@ -17,6 +17,7 @@ export default function Home() {
       <SearchInput/>
       <Sorter/>
       <PostsContainer/>
+      <PostsContainer posts={posts}/>
     </div>
   )
 }
