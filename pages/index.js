@@ -4,13 +4,13 @@ import Sorter from "@/components/sorter";
 import PostsContainer from "@/components/postsContainer";
 import getPosts from "./api/posts";
 import { usePostsStore } from "@/store/postsStore";
-import { useEffect } from "react";
+import { useEffect} from "react";
 
 export default function Home() {
   const {data} = useQuery("posts", getPosts);
   useEffect(()=>{
     usePostsStore.setState({posts: data})
-    usePostsStore.setState({searchablePosts: data})
+    if (usePostsStore.getState().searchingItem === "" ) usePostsStore.setState({searchablePosts: data})
   },[])
   return (
     <div id="app-container" className="w-full min-h-screen box-border overflow-hidden bg-slate-800 flex flex-col items-center p-10 gap-6">
