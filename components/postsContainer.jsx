@@ -4,7 +4,7 @@ import { usePostsStore } from '@/store/postsStore'
 
 export default function PostsContainer() {
   const posts = usePostsStore(state=>state.searchablePosts)
- return (
+  return (
     <main className="w-2/3 grid grid-cols-3 gap-3 mt-1">
         {posts.map((data, index)=> <Post postData={data} key={index}/>)}
     </main>

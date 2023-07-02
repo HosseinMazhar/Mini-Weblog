@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePostsStore } from '@/store/postsStore'
 
 export default function SearchInput() {
+  const [inputValue, setInputValue] = useState('');
+  useEffect(()=>{
+    setInputValue(usePostsStore.getState().searchingItem)
+  },[])
   const handleSearch = (e) => {
+    setInputValue(e.target.value);
     usePostsStore.setState({searchingItem: e.target.value})
     let posts = usePostsStore.getState().posts
     usePostsStore.setState({searchablePosts : posts})
@@ -15,6 +20,6 @@ export default function SearchInput() {
     usePostsStore.getState().setNewPosts(searchedResultArray)
   }
   return (
-    <input id="search-bar" onChange={handleSearch} className="shadow appearance-none border rounded w-2/3 py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 focus:shadow-outline" placeholder="Search..."></input>
+    <input id="search-bar" onChange={handleSearch} value={inputValue} className="shadow appearance-none border rounded w-2/3 py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500 focus:shadow-outline" placeholder="Search..."></input>
   )
 }
