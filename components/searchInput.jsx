@@ -8,10 +8,10 @@ export default function SearchInput() {
     usePostsStore.setState({searchablePosts : posts})
     let searchResult = usePostsStore.getState().searchingItem
     let searchedResultArray = usePostsStore.getState().searchablePosts.filter((object) => {
-      return object.title.includes(searchResult)
+      return object.title.includes(searchResult) || object.body.includes(searchResult)
     })
     let sortingType = usePostsStore.getState().sortingType
-    sortingType == "asc"? searchedResultArray.sort((a,b) => a.id - b.id) : searchedResultArray.sort((a,b) => b.id - a.id) 
+    sortingType == "asc" ? searchedResultArray.sort((a,b) => a.id - b.id) : searchedResultArray.sort((a,b) => b.id - a.id) 
     usePostsStore.getState().setNewPosts(searchedResultArray)
   }
   return (
