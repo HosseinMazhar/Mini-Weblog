@@ -10,7 +10,18 @@ export default function Home() {
   const {data} = useQuery("posts", getPosts);
   useEffect(()=>{
     usePostsStore.setState({posts: data})
-    if (usePostsStore.getState().searchingItem === "" ) usePostsStore.setState({searchablePosts: data})
+    if (usePostsStore.getState().searchingItem === "" ) {
+      usePostsStore.setState({searchablePosts: data})
+      switch (usePostsStore.getState().sortingType) {
+        case 'asc':
+          usePostsStore.getState().sortPosts((a,b) => a.id - b.id)
+          break;
+        case 'dsc':
+          usePostsStore.getState().sortPosts((a,b) => b.id - a.id)
+        default:
+          break;
+      }
+    }
   },[])
   return (
     <div id="app-container" className="w-full min-h-screen box-border overflow-hidden bg-slate-800 flex flex-col items-center p-10 gap-6">
